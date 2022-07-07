@@ -1,1 +1,1 @@
-Private Repository of the work done for my project with Dr. Tirthankar Roy Choudhury at NCRA for my semester project in August 2021.
+Code (being worked on) for the project with Dr. TRC (NCRA) where we use Bayesian inference to find ionized bubble parameters

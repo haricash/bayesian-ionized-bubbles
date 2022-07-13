@@ -1,4 +1,5 @@
-Code (being worked on) for the project with Dr. TRC (NCRA) where we use Bayesian inference to find ionized bubble parameters
+## Bayesian Inference for Parameter Estimation of Ionized Bubbles
+Code (in progress) for the project with Dr. TRC (NCRA) where we use Bayesian inference to find ionized bubble parameters
 
 ### Quick links
 * [emcee docs](https://emcee.readthedocs.io/en/stable/) : Link to the emcee documentation webpage

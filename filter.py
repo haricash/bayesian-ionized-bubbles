@@ -3,21 +3,25 @@
 import numpy as np
 # from skimage import morphology
 
+def sphere_idx(shape, radius, position):
+    """Generate an n-dimensional spherical mask."""
+    assert len(position) == len(shape)
+    n = len(shape)
+    position = np.array(position).reshape((-1,) + (1,) * n)
+    arr = np.linalg.norm(np.indices(shape) - position, axis=0)
+    return arr <= radius
+
+
 def signal(radius, theta_x, theta_y, del_nu, amp_del):
+    """Generates the filter"""
+	
+    filter_instance = np.zeros((64,64,64))
 
-    filter = np.zeros((64,64,64))
-
-    if (0 <= radius < 64) and (0 <= theta_x < 64) and (0 <= theta_y < 64) and (0 <= del_nu < 64):
-
-        for i in range(theta_x - radius, theta_x + radius):
-            for j in range(theta_y - radius, theta_y + radius):
-                for k in range(del_nu - radius, del_nu + radius):
-                    if (i-theta_x)**2 + (j-theta_y)**2 + (k-del_nu)**2 <= radius**2 and (0 <= i < 64) and (0 <= j < 64) and (0 <= k <64) :
-                        filter[i][j][k] = 1
-    
-        filter = amp_del * filter
-    
-    return filter
+    if (0 < radius <= 63) and (0 < theta_x <= 63) and (0 < theta_y <= 63) and (0 < del_nu <= 63) and (amp_del > 0):
+        filter_instance = sphere_idx((64,64,64), radius, (theta_x,theta_y,del_nu))
+        filter_instance = np.logical_not(filter_instance).astype(np.int32)
+    	
+    return filter_instance*amp_del
 
 
 # An attempt at writing a class for the signal. Need to work on it later

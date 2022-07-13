@@ -52,8 +52,7 @@ def log_likelihood(mu, grid_coord=grid_coord, visibility=visibility, noise=noise
 
     S_f = np.fft.fft2(signal(R, theta_x, theta_y, del_nu, amp_del)).flatten()
 
-    return -0.5*np.sum((visibility*np.conjugate(visibility) - 
-                  (visibility - S_f * np.conjugate(visibility - S_f)))/noise)
+    return np.sum((np.abs(visibility)**2 - np.abs(visibility - S_f)**2 )/noise)
 
 def log_prior(mu):
     """
@@ -84,10 +83,10 @@ def log_prob(mu, grid_coord=grid_coord, visibility = visibility, noise=noise):
 # Loading the data into the sampler
 data = (grid_coord, visibility_data.reshape(-1), noise.reshape(-1)) # a data holder for our x,y,yerr
 nwalkers = 32 # number of walkers
-niter = 500 # number of iterations for the MCMC to explore the probability space
-initial = np.array([7, 20, 40, 30, 5]) # this is the initial guess for our theta
+niter = 1000 # number of iterations for the MCMC to explore the probability space
+initial = np.array([7, 30, 30, 30, 4]) # this is the initial guess for our theta
 ndim = len(initial)
-p0 = [np.array(initial) + 1e-7 * np.random.randn(ndim) for i in range(nwalkers)] # this is how we move from one 
+p0 = [np.array(initial) + 1e-3 * np.random.randn(ndim) for i in range(nwalkers)] # this is how we move from one 
 # location to another - how to sample for each step
 
 

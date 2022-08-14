@@ -36,10 +36,9 @@ plt.plot(x, y_noise, label="Noise Data")
 plt.grid()
 plt.legend()
 plt.xlabel(r"$\Delta \nu$ [MHz]")
-plt.ylabel(r"$Amplitude |S(U = 46.786, \nu)|$ Jy")
+plt.ylabel(r"$Amplitude |S(U = 112.32, \nu)|$ Jy")
 # plt.xscale('log')
 # plt.yscale('log')
 plt.title("Variation in Visibility and Noise Amplitude wrt frequency")
-
 
 plt.show()

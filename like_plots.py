@@ -5,9 +5,11 @@ from modules.functions import cube_fft
 from likelihood import log_likelihood
 
 noise = np.load("datafiles/noise_cube.npy")
+# noise = np.ones((64,64,64))
+
 
 visibility = np.load("datafiles/spherical_bubble.npy")
-visibility = np.asarray(visibility)
+# visibility = np.asarray(visibility)
 visibility = cube_fft(visibility)
 
 def like_rad():
@@ -39,10 +41,10 @@ def like_amp():
 def plotter(func):
     plt.plot(func[0], func[1])
     
-    # plt.xlabel(r"$A_{\delta Tb}$")
-    # plt.ylabel(r"log($\Lambda$)")
-    # plt.title(r"Conditional Likelihood of $A_{\delta Tb}$ ; True $A_{\delta Tb}$ = 5.632 mJy")
-    # plt.axvline(x = 0.005632, color='black', linestyle='--', alpha=0.5)
+    plt.xlabel(r"$\Delta \nu$")
+    plt.ylabel(r"log($\Lambda$)")
+    plt.title(r"Conditional Likelihood of $\Delta \nu$")#; True $R$ = 20 $h^{-1} cMpc$")
+    plt.axvline(x = 0, color='black', linestyle='--', alpha=0.5)
     plt.grid()
     plt.show()
 

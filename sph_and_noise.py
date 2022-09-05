@@ -4,7 +4,7 @@ from modules.functions import noise_map
 from modules.functions import k_to_jy
 
 # Spherical bubble
-rad = 20 #hinv ckpc
+rad = 20. #hinv ckpc
 # bandwidth = 8.03 #MHz
 # freq_res = 0.1254 #MHz
 # freq_ext = bandwidth/2
@@ -33,4 +33,4 @@ noise = noise_map(T_sys=sys_temp, A_eff=962, del_nu_c=62.73e+3, t_c=7200) # ever
 noise = noise * 1e+26 #Jy
 np.save("datafiles/noise_cube.npy", noise)
 
-print(np.average(np.abs(sig)), np.average(np.abs(noise)))
+print(np.average(np.abs(sig)), np.std(noise))

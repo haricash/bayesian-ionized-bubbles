@@ -14,7 +14,7 @@ def log_likelihood(mu, grid_coord=grid_coord, visibility=visibility, noise=noise
     
     Doesn't convert the input mu to an integer 
 
-    Noise input should be in visibility space
+    Noise input should be the rms of the noise in that box in visibility space
     """
     # mu = np.array(mu).astype(int) #take care of this
 
@@ -26,4 +26,6 @@ def log_likelihood(mu, grid_coord=grid_coord, visibility=visibility, noise=noise
     # noise = np.fft.fftshift(noise)
     S_f = cube_fft(sig)
 
-    return np.sum((np.power(np.abs(visibility), 2) - np.power(np.abs(visibility - S_f), 2) )/np.power(np.abs(noise), 2))
+    likelihood = (np.power(np.abs(visibility), 2) - np.power(np.abs(visibility - S_f), 2)) / noise
+
+    return np.sum(likelihood)

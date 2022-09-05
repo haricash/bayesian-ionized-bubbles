@@ -3,8 +3,8 @@
 import numpy as np
 # from skimage import morphology
 
-box_size = 128 #hinv cMpc
-cell_size = 2 #hinv cMpc
+box_size = 128. #hinv cMpc
+cell_size = 2. #hinv cMpc
 max_rad = box_size/2
 
 bandwidth = 8.037 #MHz
@@ -29,13 +29,14 @@ def signal(radius, theta_x, theta_y, del_nu, amp_del):
     filter_instance = np.zeros((64,64,64))
 
     if (0 < radius <= max_rad) and (-ang_ext < theta_x <= ang_ext) and (-ang_ext < theta_y <= ang_ext) and (-freq_ext < del_nu <= freq_ext) and (amp_del > 0):
-        
+    # if (0 < radius <= 32) and (0 < theta_x <= 64) and (0 < theta_y <= 64) and (0 < del_nu <= 64) and (amp_del > 0):
+         
         # write functions for converting the natural units to coordinate units
 
-        radius = radius/box_size *64
-        theta_x = theta_x*32/ang_ext + 32
-        theta_y = theta_y*32/ang_ext + 32
-        del_nu = (del_nu/freq_ext + 1) * 32
+        radius = radius/box_size * np.float32(64)
+        theta_x = theta_x*np.float32(32)/ang_ext + np.float32(32)
+        theta_y = theta_y*np.float32(32)/ang_ext + np.float32(32)
+        del_nu = (del_nu/freq_ext + np.float32(1)) * np.float32(32)
 
         filter_instance = sphere_idx((64,64,64), radius, (theta_x,theta_y,del_nu))
         filter_instance = np.logical_not(filter_instance).astype(np.int32)

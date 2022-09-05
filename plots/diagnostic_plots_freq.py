@@ -2,18 +2,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import sys
-sys.path.append("/home/haricash/Sem 7/Project/code-scripts/bubbles/modules")
+sys.path.append("/home/haricash/academic/coursework/Sem 7/Project/code-scripts/bubbles/modules")
 from functions import cube_fft, radial_profile
 
 #Prepping visibility data for a spherical source
-vis_data = np.load("/home/haricash/Sem 7/Project/code-scripts/bubbles/datafiles/spherical_bubble.npy")
+vis_data = np.load("/home/haricash/academic/coursework/Sem 7/Project/code-scripts/bubbles/datafiles/spherical_bubble.npy")
 
 # vis_data = np.fft.fft2(vis_data)
 vis_data = cube_fft(vis_data)
 vis_data = np.abs(vis_data)
 # vis_data = np.fft.fftshift(vis_data)
 
-noise_data = np.load("/home/haricash/Sem 7/Project/code-scripts/bubbles/datafiles/noise_cube.npy")
+noise_data = np.load("/home/haricash/academic/coursework/Sem 7/Project/code-scripts/bubbles/datafiles/noise_cube.npy")
 noise_data = np.abs(noise_data)
 
 def freq_profile(radius, data):
